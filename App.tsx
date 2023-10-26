@@ -16,13 +16,41 @@ import { color } from '@styles/color';
 const SKULL_OBJ_KEY: string = 'skull';
 const TV_OBJ_KEY: string = 'tv';
 
+type ObjParamType = [number, number, number];
+
 const InitialScene = (props: any) => {
+  const [rotation, setRotation] = useState<ObjParamType>([-45, 10, 40]);
+  const [position, setPosition] = useState<ObjParamType>([0, 0, -5]);
+  const [scale, setScale] = useState<ObjParamType>([0.08, 0.08, 0.08]);
+
   const data = props.sceneNavigator.viroAppProps;
   ViroMaterials.createMaterials({
     tv: {
       diffuseTexture: require('./assets/wood.jpg'),
     },
   });
+
+  const moveObject = (newPosition: ObjParamType) => {
+    setPosition(newPosition);
+  };
+
+  const rotateObject = (rotateState: number, rotationFactor: number) => {
+    if (rotateState === 2) {
+      const newRotation: ObjParamType = [
+        rotation[0] - rotationFactor,
+        rotation[1] - rotationFactor,
+        rotation[2] - rotationFactor,
+      ];
+      setRotation(newRotation);
+    }
+  };
+
+  const resizeObject = (scaleState: number, scaleFactor: number) => {
+    if (scaleState === 2) {
+      const newScale: number = scale[0] * scaleFactor;
+      setScale([newScale, newScale, newScale]);
+    }
+  };
 
   return (
     <ViroARScene>
@@ -31,18 +59,23 @@ const InitialScene = (props: any) => {
         <Viro3DObject
           type={'OBJ'}
           source={require('@assets/skull/12140_Skull_v3_L2.obj')}
-          position={[0, 0, -5]}
-          scale={[0.08, 0.08, 0.08]}
-          rotation={[-45, 10, 40]}
+          position={position}
+          scale={scale}
+          rotation={rotation}
+          onDrag={moveObject}
+          onRotate={rotateObject}
+          onPinch={resizeObject}
         />
       ) : (
         <Viro3DObject
           type={'OBJ'}
           source={require('@assets/tv/12221_Cat_v1_l3.obj')}
-          position={[0, 0, -5]}
-          scale={[0.08, 0.08, 0.08]}
-          rotation={[-80, 10, 0]}
-          // materials={['tv']}
+          position={position}
+          scale={scale}
+          rotation={rotation}
+          onDrag={moveObject}
+          onRotate={rotateObject}
+          onPinch={resizeObject}
         />
       )}
 
