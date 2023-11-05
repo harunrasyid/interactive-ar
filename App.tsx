@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import {
   Viro3DObject,
   ViroAmbientLight,
-  ViroARImageMarker,
   ViroARScene,
   ViroARSceneNavigator,
-  ViroARTrackingTargets,
   ViroMaterials,
   ViroText,
 } from '@viro-community/react-viro';
@@ -54,59 +52,34 @@ const InitialScene = (props: any) => {
     }
   };
 
-  // Register target
-  ViroARTrackingTargets.createTargets({
-    money: {
-      source: require('./assets/money.jpg'),
-      orientation: 'Up',
-      physicalWidth: 0.157,
-    },
-  });
-
   return (
     <ViroARScene>
-      {/*<ViroAmbientLight color={color.neutral10} />*/}
-      {/*{data.object === SKULL_OBJ_KEY ? (*/}
-      {/*  <Viro3DObject*/}
-      {/*    type={'OBJ'}*/}
-      {/*    source={require('@assets/skull/12140_Skull_v3_L2.obj')}*/}
-      {/*    position={position}*/}
-      {/*    scale={scale}*/}
-      {/*    rotation={rotation}*/}
-      {/*    onDrag={moveObject}*/}
-      {/*    onRotate={rotateObject}*/}
-      {/*    onPinch={resizeObject}*/}
-      {/*  />*/}
-      {/*) : (*/}
-      {/*  <Viro3DObject*/}
-      {/*    type={'OBJ'}*/}
-      {/*    source={require('@assets/tv/12221_Cat_v1_l3.obj')}*/}
-      {/*    position={position}*/}
-      {/*    scale={scale}*/}
-      {/*    rotation={rotation}*/}
-      {/*    onDrag={moveObject}*/}
-      {/*    onRotate={rotateObject}*/}
-      {/*    onPinch={resizeObject}*/}
-      {/*  />*/}
-      {/*)}*/}
-      <ViroARImageMarker
-        target={'money'}
-        onAnchorFound={() => console.log('Anchor found')}>
-        {/*<ViroAmbientLight color={color.neutral10} />*/}
-        {/*<Viro3DObject*/}
-        {/*  type={'OBJ'}*/}
-        {/*  source={require('@assets/skull/12140_Skull_v3_L2.obj')}*/}
-        {/*  scale={[0.008, 0.008, 0.008]}*/}
-        {/*  rotation={[0, 0, 0]}*/}
-        {/*/>*/}
-        <ViroText
-          text={'Pinjam Dulu 100'}
-          scale={[0.2, 0.2, 0.2]}
-          // position={[0, 0.1, 0]}
-          rotation={[-85, 0, 0]}
-          style={styles.helloWorldTextStyle}
+      <ViroAmbientLight color={color.neutral10} />
+      {data.object === SKULL_OBJ_KEY ? (
+        <Viro3DObject
+          type={'OBJ'}
+          source={require('@assets/skull/12140_Skull_v3_L2.obj')}
+          position={position}
+          scale={scale}
+          rotation={rotation}
+          onDrag={moveObject}
+          onRotate={rotateObject}
+          onPinch={resizeObject}
         />
-      </ViroARImageMarker>
+      ) : (
+        <Viro3DObject
+          type={'OBJ'}
+          source={require('@assets/tv/12221_Cat_v1_l3.obj')}
+          position={position}
+          scale={scale}
+          rotation={rotation}
+          onDrag={moveObject}
+          onRotate={rotateObject}
+          onPinch={resizeObject}
+        />
+      )}
+
+      <ViroText text={'BRUH'} position={[0, -5, -3]} scale={[5, 5, 5]} />
     </ViroARScene>
   );
 };
@@ -141,12 +114,5 @@ export default App;
 const styles = StyleSheet.create({
   buttonContainer: {
     padding: spacing.extraMedium,
-  },
-  helloWorldTextStyle: {
-    fontFamily: 'Arial',
-    fontSize: 30,
-    color: '#ffffff',
-    textAlignVertical: 'center',
-    textAlign: 'center',
   },
 });
