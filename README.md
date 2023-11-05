@@ -1,3 +1,13 @@
+# About Interactive AR
+
+This is my AR exploration project, that i developed using react native and ViroAR libraries. there are 5 main feature for now
+-  Change object
+-  Resize object with pinch gesture
+-  Move object with drag gesture
+-  Rotate object
+-  Image detection for anchoring object (on image-detection branch)
+
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
